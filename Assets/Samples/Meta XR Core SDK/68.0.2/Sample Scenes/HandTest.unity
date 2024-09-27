@@ -211,10 +211,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transition: {fileID: 2070895115}
   _videos:
-  - videoName: Video1.mp4
-    audioClip: {fileID: 8300000, guid: 64b77fada2f599544a16cf649ceed2b4, type: 3}
-  - videoName: Video2.mp4
-    audioClip: {fileID: 8300000, guid: 64b77fada2f599544a16cf649ceed2b4, type: 3}
+  - videoName: 1o_video_abertura_fiacao.mp4
+    audioClip: {fileID: 8300000, guid: bc08f696de6174b43ac8438535250ab3, type: 3}
+  - videoName: 2o_video_carda.mp4
+    audioClip: {fileID: 8300000, guid: e79bb4ab6957c7e4694ec386b01cd651, type: 3}
+  - videoName: 3o_video_fiacao.mp4
+    audioClip: {fileID: 8300000, guid: fa750977cc123a143bfce632eaee6dd3, type: 3}
+  - videoName: 4o_video_urdideira.mp4
+    audioClip: {fileID: 8300000, guid: e5f8935f9744aff4a8c90bd5fc8d954a, type: 3}
 --- !u!4 &210084003
 Transform:
   m_ObjectHideFlags: 0
@@ -506,7 +510,7 @@ Transform:
   m_Children:
   - {fileID: 2100857862}
   m_Father: {fileID: 863221866}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 57.914, z: 0}
 --- !u!114 &358702058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,13 +1045,14 @@ GameObject:
   - component: {fileID: 1030596939}
   - component: {fileID: 1030596940}
   - component: {fileID: 1030596934}
+  - component: {fileID: 1030596941}
   m_Layer: 5
   m_Name: Canvas - Countdown Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1030596934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1131,14 +1136,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1030596933}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: -0.005, y: 0.005, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 950713027}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1177,6 +1182,18 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1030596941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030596933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5a321de2fade1429d6f7a22cd927e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1038970580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,6 +1388,7 @@ GameObject:
   - component: {fileID: 1167483745}
   - component: {fileID: 1167483744}
   - component: {fileID: 1167483743}
+  - component: {fileID: 1167483748}
   m_Layer: 0
   m_Name: VideoSphere
   m_TagString: Untagged
@@ -1415,7 +1433,7 @@ VideoPlayer:
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
-  - 1
+  - 0.15
   m_Url: file://C:/Users/joaos/Downloads/VID_20240923_145321_00_002.mp4
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
@@ -1484,13 +1502,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167483742}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: -10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 210084003}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1167483748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167483742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfd03e477427d4a43a0d22c9e42cd44d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1191662067
 PrefabInstance:
   m_ObjectHideFlags: 0

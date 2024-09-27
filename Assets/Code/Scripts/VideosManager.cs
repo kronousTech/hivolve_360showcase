@@ -54,7 +54,7 @@ public class VideosManager : MonoBehaviour
 
         var sectionDuration = _videos[_index].audioClip.length;
 
-        yield return new WaitForSeconds(sectionDuration);
+        yield return new WaitForSeconds(sectionDuration + 6);
 
         OnSectionEndCooldown?.Invoke();
 

@@ -1,19 +1,20 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioLoader : MonoBehaviour
 {
     private AudioSource _source;
 
+    private Coroutine _coroutine;
+
     private void OnEnable()
     {
-        VideosManager.OnRequestVideoLoad.AddListener(LoadAudio);
+        VideosManager.OnRequestVideoLoad.AddListener(PrepareAudio);
         VideosManager.OnSectionRestartRequest.AddListener(StopAudio);
     }
     private void OnDisable()
     {
-        VideosManager.OnRequestVideoLoad.RemoveListener(LoadAudio);
+        VideosManager.OnRequestVideoLoad.RemoveListener(PrepareAudio);
         VideosManager.OnSectionRestartRequest.RemoveListener(StopAudio);
     }
     private void Awake()
@@ -21,13 +22,21 @@ public class AudioLoader : MonoBehaviour
         _source = GetComponent<AudioSource>();
     }
 
-    private void LoadAudio(VideoInfo info)
+    private void PrepareAudio(VideoInfo info)
     {
+        _coroutine = StartCoroutine(LoadAudio(info));
+    }
+    private IEnumerator LoadAudio(VideoInfo info)
+    {
+        yield return new WaitForSeconds(3);
+
         _source.clip = info.audioClip;
         _source.Play();
     }
     private void StopAudio()
     {
+        StopCoroutine(_coroutine);
+
         _source.Stop();
     }
 }

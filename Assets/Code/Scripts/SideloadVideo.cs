@@ -11,11 +11,13 @@ namespace KronosTech.VideoLoader
         private void OnEnable()
         {
             VideosManager.OnRequestVideoLoad.AddListener(LoadVideo);
+            VideosManager.OnRequestVideoPlay.AddListener(PlayVideo);
             VideosManager.OnSectionRestartRequest.AddListener(StopVideo);
         }
         private void OnDisable()
         {
             VideosManager.OnRequestVideoLoad.RemoveListener(LoadVideo);
+            VideosManager.OnRequestVideoPlay.RemoveListener(PlayVideo);
             VideosManager.OnSectionRestartRequest.RemoveListener(StopVideo);
         }
         private void Awake()
@@ -23,13 +25,18 @@ namespace KronosTech.VideoLoader
             _player = GetComponent<VideoPlayer>();
         }
 
-        private void LoadVideo(VideoInfo info)
+        private void LoadVideo(string info)
         {
 #if UNITY_EDITOR
-            _player.url = Path.Combine("file://C:/Users/joaos/Downloads/", info.videoName);
+            _player.url = Path.Combine("file://C:/Users/joaos/Downloads/", info);
 #else
-            _player.url = Path.Combine(Application.persistentDataPath, info.videoName);
+            _player.url = Path.Combine(Application.persistentDataPath, info);
 #endif
+            _player.Prepare();
+        }
+
+        private void PlayVideo()
+        {
             _player.Play();
         }
 

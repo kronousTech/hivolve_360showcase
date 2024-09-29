@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RotateSphereAtStart : MonoBehaviour
@@ -15,6 +13,10 @@ public class RotateSphereAtStart : MonoBehaviour
 
     private void RotateForward()
     {
-        transform.forward = -Camera.main.transform.forward;
+        var forward = Camera.main.transform.eulerAngles;
+        forward.x = 0;
+        forward.y -= 180;
+        forward.z = 0;
+        transform.eulerAngles = forward;
     }
 }

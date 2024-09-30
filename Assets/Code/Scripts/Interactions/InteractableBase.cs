@@ -20,13 +20,13 @@ public abstract class InteractableBase : MonoBehaviour
     public Action OnInteractableActivated;
     public Action<float, float> OnInteracting;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
-        VideosManager.OnSectionRestartRequest.AddListener(ClearActivatedState);
+        VideosManager.OnRestartEnd.AddListener(ClearActivatedState);
     }
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
-        VideosManager.OnSectionRestartRequest.RemoveListener(ClearActivatedState);
+        VideosManager.OnRestartEnd.RemoveListener(ClearActivatedState);
     }
     private void Awake()
     {

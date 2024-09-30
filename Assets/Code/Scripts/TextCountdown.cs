@@ -15,13 +15,13 @@ public class TextCountdown : MonoBehaviour
     {
         //VideosManager.OnSectionEndCooldown.AddListener(ShowText);
         //VideosManager.OnSectionEndCooldown.AddListener(() => StartCoroutine(SetCountdownText()));
-        VideosManager.OnSectionEnd.AddListener(HideText);
+        //VideosManager.OnVideoEnd.AddListener(HideText);
     }
     private void OnDisable()
     {
         //VideosManager.OnSectionEndCooldown.RemoveListener(ShowText);
         //VideosManager.OnSectionEndCooldown.RemoveListener(() => StartCoroutine(SetCountdownText()));
-        VideosManager.OnSectionEnd.RemoveListener(HideText);
+        //VideosManager.OnVideoEnd.RemoveListener(HideText);
     }
     private void Awake()
     {

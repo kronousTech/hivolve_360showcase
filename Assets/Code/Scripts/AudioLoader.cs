@@ -10,12 +10,12 @@ public class AudioLoader : MonoBehaviour
     private void OnEnable()
     {
         VideosManager.OnRequestAudioPlay.AddListener(PrepareAudio);
-        VideosManager.OnSectionRestartRequest.AddListener(StopAudio);
+        VideosManager.OnRestartEnd.AddListener(StopAudio);
     }
     private void OnDisable()
     {
         VideosManager.OnRequestAudioPlay.RemoveListener(PrepareAudio);
-        VideosManager.OnSectionRestartRequest.RemoveListener(StopAudio);
+        VideosManager.OnRestartEnd.RemoveListener(StopAudio);
     }
     private void Awake()
     {

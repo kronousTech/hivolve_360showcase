@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,61 +9,38 @@ public class VideosManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Animator _transition;
-    [SerializeField] private InteractableBase _introButton;
-    [SerializeField] private InteractableBase _startButton;
-    [SerializeField] private InteractableBase _nextVideoButton;
-    [SerializeField] private InteractableBase _restartButton;
     [SerializeField] private GameObject _introBlackground;
     [SerializeField] private Animator _introBlurredBlackground;
-
-    [SerializeField] private UIFollowsPlayer _introUI;
-    [SerializeField] private UIFollowsPlayer _startUI;
-    [SerializeField] private UIFollowsPlayer _nextUI;
-
 
     [Header("Settings")]
     [SerializeField] private AudioClip _intro;
     [SerializeField] private VideoInfo[] _videos;
 
-    public static UnityEvent OnExperienceStart = new();
+    public static UnityEvent OnIntroStart = new();
+    public static UnityEvent OnIntroEnd = new();
+    public static UnityEvent OnTransitionStart = new();
+    public static UnityEvent OnTransitionEnd = new();
+    public static UnityEvent OnVideoEnd = new();
+    public static UnityEvent OnRestartStart = new();
+    public static UnityEvent OnRestartEnd = new();
+
+    public static UnityEvent OnNextVideoAvailable = new();
+    public static UnityEvent OnPrevVideoAvailable = new();
+
     public static UnityEvent<AudioClip> OnRequestAudioPlay = new();
     public static UnityEvent<string> OnRequestVideoLoad = new();
     public static UnityEvent OnRequestVideoPlay = new();
-    public static UnityEvent OnSectionEnd = new();
-
-    public static UnityEvent OnSectionRestartRequest = new();
 
     private int _index;
 
     private Coroutine _videoSection = null;
     private Coroutine _introSection = null;
 
-#if UNITY_EDITOR
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            StartIntro();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartCoroutine(RestartBehavior());
-        }
-    }
-#endif
     private void Start()
     {
-        _introButton.SetAvailable();
-        _startButton.SetUnavailable();
-        _nextVideoButton.SetUnavailable();
-        _restartButton.SetUnavailable();
-
         _introBlackground.SetActive(true);
         _introBlurredBlackground.gameObject.SetActive(true);
-
-        _introUI.SetInFrontOfPlayer();
     }
-
 
     public void StartIntro()
     {
@@ -69,9 +48,9 @@ public class VideosManager : MonoBehaviour
     }
     public IEnumerator IntroBehavior()
     {
-        _index = 0;
+        OnIntroStart?.Invoke();
 
-        _restartButton.SetAvailable();
+        _index = 0;
 
         _introBlurredBlackground.SetBool("Visible", false);
 
@@ -80,22 +59,17 @@ public class VideosManager : MonoBehaviour
 
         yield return new WaitForSeconds(_intro.length + 3);
 
-        // Show start experience button
-        _startButton.SetAvailable();
-        _startUI.SetInFrontOfPlayer();
+        OnIntroEnd?.Invoke();
     }
 
     public void StartSections()
     {
-        OnExperienceStart?.Invoke();
-
         _videoSection = StartCoroutine(VideoBehavior());
     }
 
     public IEnumerator VideoBehavior()
     {
-        _restartButton.SetUnavailable();
-        _nextVideoButton.SetUnavailable();
+        OnTransitionStart?.Invoke();
 
         _transition.SetTrigger("Transition");
 
@@ -108,8 +82,7 @@ public class VideosManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        _restartButton.SetAvailable();
-        
+        OnTransitionEnd?.Invoke();
 
         OnRequestVideoPlay?.Invoke();
         OnRequestAudioPlay?.Invoke(_videos[_index].audioClip);
@@ -118,26 +91,28 @@ public class VideosManager : MonoBehaviour
 
         yield return new WaitForSeconds(sectionDuration + 6);
 
-        OnSectionEnd?.Invoke();
-
-        _index++;
+        OnVideoEnd?.Invoke();
 
         if (_index >= _videos.Length)
         {
             Restart();
+
+            yield break;
         }
-        else
+        
+        if (_index + 1 < _videos.Length)
         {
-            _nextVideoButton.SetAvailable();
-            _nextUI.SetInFrontOfPlayer();
+            OnNextVideoAvailable?.Invoke();
+        }
+        if(_index - 1 >= 0)
+        {
+            OnPrevVideoAvailable?.Invoke();
         }
     }
 
     private IEnumerator RestartBehavior()
     {
-        _restartButton.SetUnavailable();
-        _startButton.SetUnavailable();
-        _nextVideoButton.SetUnavailable();
+        OnRestartStart?.Invoke();
 
         Debug.LogWarning("Restarting");
 
@@ -158,10 +133,7 @@ public class VideosManager : MonoBehaviour
         _introBlurredBlackground.gameObject.SetActive(true);
         _introBlurredBlackground.SetBool("Visible", true);
 
-        OnSectionRestartRequest?.Invoke();
-
-        _introButton.SetAvailable();
-        _introUI.SetInFrontOfPlayer();
+        OnRestartEnd?.Invoke();
     }
 
     public void Restart()
@@ -171,8 +143,16 @@ public class VideosManager : MonoBehaviour
 
     public void NextVideo()
     {
+        _index++;
+
         StartCoroutine(VideoBehavior());
-    } 
+    }
+    public void PreviousVideo()
+    {
+        _index--;
+
+        StartCoroutine(VideoBehavior());
+    }
 }
 
 

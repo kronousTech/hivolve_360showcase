@@ -4,11 +4,11 @@ public class RotateSphereAtStart : MonoBehaviour
 {
     private void OnEnable()
     {
-        VideosManager.OnExperienceStart.AddListener(RotateForward);
+        VideosManager.OnTransitionStart.AddListener(RotateForward);
     }
     private void OnDisable()
     {
-        VideosManager.OnExperienceStart.RemoveListener(RotateForward);
+        VideosManager.OnTransitionStart.RemoveListener(RotateForward);
     }
 
     private void RotateForward()

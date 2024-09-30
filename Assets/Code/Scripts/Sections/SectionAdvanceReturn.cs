@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SectionAdvanceReturn : SectionBase
@@ -15,13 +13,14 @@ public class SectionAdvanceReturn : SectionBase
         VideosManager.OnVideoEnd.AddListener(ShowText);
         VideosManager.OnEndSectionStart.AddListener(HideElements);
 
+        VideosManager.OnTransitionEnd.AddListener(SetAdvanceEnable);
+        VideosManager.OnTransitionStart.AddListener(DisableAdvance);
+
         VideosManager.OnNextVideoAvailable.AddListener(ShowNextButton);
         VideosManager.OnPrevVideoAvailable.AddListener(ShowReturnButton);
 
-        InputInteractor.OnAdvanceInput.AddListener(OnInputStart);
-        InputInteractor.OnAdvanceInputStop.AddListener(OnInputStop);
+        InputInteractor.OnAdvanceInput.AddListener(ForceInputActivate);
         InputInteractor.OnRetreatInput.AddListener(OnInputStartPrevious);
-        InputInteractor.OnRetreatInputStop.AddListener(OnInputStopPrevious);
 
     }
     private void Start()
@@ -33,14 +32,10 @@ public class SectionAdvanceReturn : SectionBase
     {
         if (_canInteractPrevious)
         {
-            StartInteraction(_returnButton);
+            _returnButton.ForceActivate();
+            _canInteractPrevious = false;
         }
     }
-    protected void OnInputStopPrevious()
-    {
-        StopInteraction(_returnButton);
-    }
-
     private void ShowNextButton()
     {
         _interactable.SetAvailable();
@@ -57,7 +52,17 @@ public class SectionAdvanceReturn : SectionBase
         HideText();
         _interactable.SetUnavailable();
         _returnButton.SetUnavailable();
+        _canInteract = false;
+        _canInteractPrevious = false;
+    }
 
+    private void SetAdvanceEnable()
+    {
+        _canInteract = true;
+        _canInteractPrevious = true;
+    }
+    private void DisableAdvance()
+    {
         _canInteract = false;
         _canInteractPrevious = false;
     }

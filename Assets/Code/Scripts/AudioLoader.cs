@@ -9,14 +9,11 @@ public class AudioLoader : MonoBehaviour
 
     private void OnEnable()
     {
+        VideosManager.OnTransitionStart.AddListener(StopAudio);
         VideosManager.OnRequestAudioPlay.AddListener(PrepareAudio);
         VideosManager.OnRestartEnd.AddListener(StopAudio);
     }
-    private void OnDisable()
-    {
-        VideosManager.OnRequestAudioPlay.RemoveListener(PrepareAudio);
-        VideosManager.OnRestartEnd.RemoveListener(StopAudio);
-    }
+  
     private void Awake()
     {
         _source = GetComponent<AudioSource>();
@@ -24,18 +21,22 @@ public class AudioLoader : MonoBehaviour
 
     private void PrepareAudio(AudioClip clip)
     {
-        _coroutine = StartCoroutine(LoadAudio(clip));
+        StartCoroutine(LoadAudio(clip));
     }
     private IEnumerator LoadAudio(AudioClip clip)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(4);
 
         _source.clip = clip;
         _source.Play();
     }
     private void StopAudio()
     {
-        StopCoroutine(_coroutine);
+        StopAllCoroutines();
+        //if (_coroutine != null)
+        //{
+        //    StopCoroutine(_coroutine);
+        //}
 
         _source.Stop();
     }

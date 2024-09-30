@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class SectionStart : SectionBase
 {
     private void OnEnable()
@@ -10,25 +6,27 @@ public class SectionStart : SectionBase
         VideosManager.OnTransitionStart.AddListener(DisableSection);
         VideosManager.OnRestartStart.AddListener(DisableSection);
 
-        InputInteractor.OnAdvanceInput.AddListener(OnInputStart);
-        InputInteractor.OnAdvanceInputStop.AddListener(OnInputStop);
+        InputInteractor.OnAdvanceInput.AddListener(ForceInputActivate);
+
+        VideosManager.OnIntroStart.AddListener(EnableCanInteract);
+        VideosManager.OnTransitionStart.AddListener(DisableCanInteract);
+        VideosManager.OnRestartStart.AddListener(DisableCanInteract);
     }
     private void Start()
     {
         DisableSection();
+        DisableCanInteract();
     }
 
     private void EnableSection()
     {
         ShowText();
         _interactable.SetAvailable();
-        EnableCanInteract();
     }
 
     private void DisableSection()
     {
         HideText();
-        DisableCanInteract();
         _interactable.SetUnavailable();
     }
 }

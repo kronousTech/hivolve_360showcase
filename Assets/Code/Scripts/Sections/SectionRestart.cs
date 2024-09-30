@@ -16,8 +16,7 @@ public class SectionRestart : SectionBase
         VideosManager.OnRestartStart.AddListener(DisableButton);
         VideosManager.OnRestartEnd.AddListener(DisableButton);
 
-        InputInteractor.OnRestartInput.AddListener(OnInputStart);
-        InputInteractor.OnRestartInputStop.AddListener(OnInputStop);
+        InputInteractor.OnRestartInput.AddListener(ForceInputActivate);
     }
 
     private void Start()

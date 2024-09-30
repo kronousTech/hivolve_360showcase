@@ -5,9 +5,6 @@ using UnityEngine;
 
 public abstract class InteractableBase : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private Animator _animator;
-
     private BoxCollider _collider;
 
     private static readonly float LoadTime = 3f;
@@ -60,13 +57,11 @@ public abstract class InteractableBase : MonoBehaviour
         _loadingValue = 0;
         OnInteracting?.Invoke(LoadTime, _loadingValue);
         _collider.enabled = true;
-        _animator.SetBool("State", true);
         _activated = false;
     }
     public void SetUnavailable()
     {
         _collider.enabled = false;
-        _animator.SetBool("State", false);
         _activated = true;
     }
 
@@ -82,6 +77,15 @@ public abstract class InteractableBase : MonoBehaviour
     public void OnInteractStop()
     {
         _isInteracting = false;
+    }
+
+    public void ForceActivate()
+    {
+        SetUnavailable();
+
+        OnInteractableActivated?.Invoke();
+
+        OnActivated();
     }
 
     protected abstract void OnActivated(); 

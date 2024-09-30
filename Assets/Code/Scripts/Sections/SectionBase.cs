@@ -1,3 +1,4 @@
+using Oculus.Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,28 +23,19 @@ public class SectionBase : MonoBehaviour
         _textAnimator.SetBool("State", false);
     }
 
-    protected void OnInputStart()
+    protected void ForceInputActivate()
     {
         if (_canInteract)
         {
-            StartInteraction(_interactable);
+            _interactable.ForceActivate();
+            _canInteract = false;
         }
     }
-    protected void OnInputStop()
-    {
-        StopInteraction(_interactable);
-    }
-
-    protected void StartInteraction(InteractableBase interactable)
-    {
-        interactable.OnInteract();
-    }
-    protected void StopInteraction(InteractableBase interactable)
-    {
-        interactable.OnInteractStop();
-    }
+    
     protected void EnableCanInteract()
     {
+        Debug.Log("Enabled");
+
         _canInteract = true;
     }
     protected void DisableCanInteract()

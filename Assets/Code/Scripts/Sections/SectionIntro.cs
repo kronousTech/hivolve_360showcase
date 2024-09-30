@@ -8,8 +8,7 @@ public class SectionIntro : SectionBase
         VideosManager.OnIntroStart.AddListener(HideElements);
         VideosManager.OnIntroStart.AddListener(DisableCanInteract);
 
-        InputInteractor.OnAdvanceInput.AddListener(OnInputStart);
-        InputInteractor.OnAdvanceInputStop.AddListener(OnInputStop);
+        InputInteractor.OnAdvanceInput.AddListener(ForceInputActivate);
     }
     private void Start()
     {

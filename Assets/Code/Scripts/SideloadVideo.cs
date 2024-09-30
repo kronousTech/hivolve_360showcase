@@ -13,12 +13,7 @@ namespace KronosTech.VideoLoader
             VideosManager.OnRequestVideoLoad.AddListener(LoadVideo);
             VideosManager.OnRequestVideoPlay.AddListener(PlayVideo);
             VideosManager.OnRestartEnd.AddListener(StopVideo);
-        }
-        private void OnDisable()
-        {
-            VideosManager.OnRequestVideoLoad.RemoveListener(LoadVideo);
-            VideosManager.OnRequestVideoPlay.RemoveListener(PlayVideo);
-            VideosManager.OnRestartEnd.RemoveListener(StopVideo);
+            VideosManager.OnEndSectionStart.AddListener(StopVideo);
         }
         private void Awake()
         {

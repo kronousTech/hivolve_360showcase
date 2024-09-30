@@ -362,6 +362,7 @@ MonoBehaviour:
   _transition: {fileID: 2070895115}
   _introBlackground: {fileID: 1544364760}
   _introBlurredBlackground: {fileID: 1563294687}
+  _endBlackground: {fileID: 1605973741}
   _intro: {fileID: 8300000, guid: 92e6bea2f97ea7a4c98103222bfa51db, type: 3}
   _videos:
   - videoName: 1o_video_abertura_fiacao.mp4
@@ -382,6 +383,11 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: ef19d48bb3f17384b95e7c231bb99ddd, type: 3}
   - videoName: 9o_video_corte_dobragem.mp4
     audioClip: {fileID: 8300000, guid: b1363b578aa7e9e42bdd96be3a786b1f, type: 3}
+  - videoName: 10o_video_comfort.mp4
+    audioClip: {fileID: 8300000, guid: fc24588b668b53748957321890a5b105, type: 3}
+  - videoName: 11o_video_armazem.mp4
+    audioClip: {fileID: 8300000, guid: 0be292e9f1597914685d706e58dc3deb, type: 3}
+  _index: 0
 --- !u!4 &210084003
 Transform:
   m_ObjectHideFlags: 0
@@ -400,6 +406,7 @@ Transform:
   - {fileID: 344942425}
   - {fileID: 1544364764}
   - {fileID: 1563294686}
+  - {fileID: 1605973742}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &265337587
@@ -4065,7 +4072,7 @@ VideoPlayer:
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
-  - 0.15
+  - 0.25
   m_Url: file://C:/Users/joaos/Downloads/VID_20240923_145321_00_002.mp4
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
@@ -6095,6 +6102,89 @@ MonoBehaviour:
   usePerEyeCameras: 0
   useFixedUpdateForTracking: 0
   disableEyeAnchorCameras: 0
+--- !u!1 &1605973741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1605973742}
+  - component: {fileID: 1605973744}
+  - component: {fileID: 1605973743}
+  m_Layer: 0
+  m_Name: EndSphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1605973742
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605973741}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.9986295, z: -0, w: -0.052335896}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: -49.5, y: 49.5, z: 49.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 210084003}
+  m_LocalEulerAnglesHint: {x: 0, y: 186, z: 0}
+--- !u!23 &1605973743
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605973741}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a8de02840c3373541a82105311ef81dc, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1605973744
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605973741}
+  m_Mesh: {fileID: 4300000, guid: a45930ad4cad6f5408b5a62420cc7ec8, type: 2}
 --- !u!1 &1623181385
 GameObject:
   m_ObjectHideFlags: 0

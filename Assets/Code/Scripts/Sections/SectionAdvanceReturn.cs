@@ -13,6 +13,7 @@ public class SectionAdvanceReturn : SectionBase
         VideosManager.OnTransitionStart.AddListener(HideElements);
         VideosManager.OnRestartStart.AddListener(HideElements);
         VideosManager.OnVideoEnd.AddListener(ShowText);
+        VideosManager.OnEndSectionStart.AddListener(HideElements);
 
         VideosManager.OnNextVideoAvailable.AddListener(ShowNextButton);
         VideosManager.OnPrevVideoAvailable.AddListener(ShowReturnButton);

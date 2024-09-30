@@ -11,6 +11,14 @@ public class VideosManager : MonoBehaviour
     [SerializeField] private InteractableBase _startButton;
     [SerializeField] private InteractableBase _nextVideoButton;
     [SerializeField] private InteractableBase _restartButton;
+    [SerializeField] private GameObject _introBlackground;
+    [SerializeField] private Animator _introBlurredBlackground;
+
+    [SerializeField] private UIFollowsPlayer _introUI;
+    [SerializeField] private UIFollowsPlayer _startUI;
+    [SerializeField] private UIFollowsPlayer _nextUI;
+
+
     [Header("Settings")]
     [SerializeField] private AudioClip _intro;
     [SerializeField] private VideoInfo[] _videos;
@@ -47,6 +55,11 @@ public class VideosManager : MonoBehaviour
         _startButton.SetUnavailable();
         _nextVideoButton.SetUnavailable();
         _restartButton.SetUnavailable();
+
+        _introBlackground.SetActive(true);
+        _introBlurredBlackground.gameObject.SetActive(true);
+
+        _introUI.SetInFrontOfPlayer();
     }
 
 
@@ -60,6 +73,8 @@ public class VideosManager : MonoBehaviour
 
         _restartButton.SetAvailable();
 
+        _introBlurredBlackground.SetBool("Visible", false);
+
         // Play Intro Audio
         OnRequestAudioPlay?.Invoke(_intro);
 
@@ -67,6 +82,7 @@ public class VideosManager : MonoBehaviour
 
         // Show start experience button
         _startButton.SetAvailable();
+        _startUI.SetInFrontOfPlayer();
     }
 
     public void StartSections()
@@ -84,12 +100,16 @@ public class VideosManager : MonoBehaviour
         _transition.SetTrigger("Transition");
 
         yield return new WaitForSeconds(1f);
-        
+
+        _introBlackground.SetActive(false);
+        _introBlurredBlackground.gameObject.SetActive(false);
+
         OnRequestVideoLoad?.Invoke(_videos[_index].videoName);
 
         yield return new WaitForSeconds(1f);
 
         _restartButton.SetAvailable();
+        
 
         OnRequestVideoPlay?.Invoke();
         OnRequestAudioPlay?.Invoke(_videos[_index].audioClip);
@@ -109,6 +129,7 @@ public class VideosManager : MonoBehaviour
         else
         {
             _nextVideoButton.SetAvailable();
+            _nextUI.SetInFrontOfPlayer();
         }
     }
 
@@ -133,9 +154,14 @@ public class VideosManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
+        _introBlackground.SetActive(true);
+        _introBlurredBlackground.gameObject.SetActive(true);
+        _introBlurredBlackground.SetBool("Visible", true);
+
         OnSectionRestartRequest?.Invoke();
 
         _introButton.SetAvailable();
+        _introUI.SetInFrontOfPlayer();
     }
 
     public void Restart()

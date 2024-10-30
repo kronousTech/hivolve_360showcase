@@ -385,9 +385,9 @@ MonoBehaviour:
   - videoName: 7o_video_nw_seroa.mp4
     audioClip: {fileID: 8300000, guid: 8c1117784a1e5624db2f28e8b5fbf4ca, type: 3}
   - videoName: 8o_video_tratamento.mp4
-    audioClip: {fileID: 8300000, guid: ef19d48bb3f17384b95e7c231bb99ddd, type: 3}
-  - videoName: 9o_video_corte_dobragem.mp4
-    audioClip: {fileID: 8300000, guid: b1363b578aa7e9e42bdd96be3a786b1f, type: 3}
+    audioClip: {fileID: 8300000, guid: 1e5c4359f06f86445862fbe144f0c772, type: 3}
+  - videoName: 9o_video_corte_dobragem_final.mp4
+    audioClip: {fileID: 8300000, guid: e9e2a439cc94b4c42894772f63eb992b, type: 3}
   - videoName: 10o_video_comfort.mp4
     audioClip: {fileID: 8300000, guid: fc24588b668b53748957321890a5b105, type: 3}
   - videoName: 11o_video_armazem.mp4

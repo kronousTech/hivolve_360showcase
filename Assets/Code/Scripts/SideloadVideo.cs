@@ -14,6 +14,7 @@ namespace KronosTech.VideoLoader
             VideosManager.OnRequestVideoPlay.AddListener(PlayVideo);
             VideosManager.OnRestartEnd.AddListener(StopVideo);
             VideosManager.OnEndSectionStart.AddListener(StopVideo);
+
         }
         private void Awake()
         {

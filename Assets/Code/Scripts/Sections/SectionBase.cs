@@ -16,7 +16,15 @@ public class SectionBase : MonoBehaviour
     protected void ShowText()
     {
         _textAnimator.SetBool("State", true);
-        _textUIPlacer.SetInFrontOfPlayer();
+        
+        if(_textUIPlacer!= null)
+        {
+            _textUIPlacer.SetInFrontOfPlayer();
+        }
+        else
+        {
+            Debug.LogError("Trying to use null text placer.");
+        }
     }
     protected void HideText()
     {

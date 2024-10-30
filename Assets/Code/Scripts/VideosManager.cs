@@ -166,6 +166,13 @@ public class VideosManager : MonoBehaviour
     {
         ClearTransitions();
 
+        if (_index + 1 >= _videos.Length)
+        {
+            StartCoroutine(EndBehavior());
+
+            return;
+        }
+
         _index++;
 
         StartCoroutine(VideoBehavior());

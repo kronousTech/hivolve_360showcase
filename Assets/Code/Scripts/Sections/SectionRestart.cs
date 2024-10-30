@@ -21,16 +21,18 @@ public class SectionRestart : SectionBase
 
     private void Start()
     {
-        DisableCanInteract();
+        DisableButton();
     }
 
     private void EnableButton()
     {
+        _interactable.SetAvailable();
         EnableCanInteract();
         ShowElements();
     }
     private void DisableButton()
     {
+        _interactable.SetUnavailable();
         DisableCanInteract();
         HideElements();
     }

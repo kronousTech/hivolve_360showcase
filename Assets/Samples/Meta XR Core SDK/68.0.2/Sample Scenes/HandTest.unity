@@ -5772,7 +5772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14407d99c2fb0fc4dbcba810766b30f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textAnimator: {fileID: 0}
+  _textAnimator: {fileID: 712767231}
   _textUIPlacer: {fileID: 0}
   _interactable: {fileID: 953851348}
   _buttonAnimator: {fileID: 712767231}
